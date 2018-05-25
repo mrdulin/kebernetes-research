@@ -1,0 +1,34 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "podtest",
+    "labels": {
+      "name": "redis-master"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "master1",
+        "image": "redis",
+        "ports": [
+          {
+            "containerPort": 6379,
+            "hostPort": 6388
+          }
+        ]
+      },
+      {
+        "name": "master2",
+        "image": "sickp/alpine-sshd",
+        "ports": [
+          {
+            "containerPort": 6379,
+            "hostPort": 8888
+          }
+        ]
+      }
+    ]
+  }
+}

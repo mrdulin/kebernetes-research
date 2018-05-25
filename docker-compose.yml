@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  kebernetes-research:
+    image: gcr.io/my-kubernetes-codelab-205006/kubernetes-research:v1
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4000:4000

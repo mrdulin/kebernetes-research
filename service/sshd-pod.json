@@ -1,0 +1,25 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nginx-service",
+    "labels": {
+      "user": "service-nginx",
+      "name": "client-sshd"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "client-container",
+        "image": "sickp/alpine-sshd",
+        "ports": [
+          {
+            "containerPort": 22,
+            "hostPort": 1314
+          }
+        ]
+      }
+    ]
+  }
+}
