@@ -2,7 +2,17 @@
 
 A nodejs application for kubernetes research
 
-# 参考链接
+## 说明
+
+执行`eval $(minikube docker-env)`命令，`docker ps`就可以查看在 minikube 的 VM 中运行的 container 了
+
+`minikube start` - 在本机启动 kubernetes 集群
+
+## 参考链接
+
+minikube 访问 Node port 暴露的服务 - https://github.com/kubernetes/minikube/blob/master/README.md#services
+
+https://kubernetes.io/docs/getting-started-guides/minikube/
 
 https://kubernetes.io/cn/
 
