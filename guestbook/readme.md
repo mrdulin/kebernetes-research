@@ -14,19 +14,112 @@
 kubectl create -f ./guestbook/<资源对象配置文件>.yaml
 ```
 
+查看 RC
+
+```bash
+kubectl get rc
+```
+
+查看 Service
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl get svc
+NAME                  TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+frontend              NodePort    10.102.20.105    <none>        80:30001/TCP     18h
+kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          5d
+kubernetes-bootcamp   NodePort    10.100.106.232   <none>        8080:32191/TCP   4d
+nginx-service         ClusterIP   10.109.20.127    <none>        8000/TCP         3d
+redis-master          ClusterIP   10.101.122.142   <none>        6379/TCP         18h
+redis-slave           ClusterIP   10.110.193.31    <none>        6379/TCP         18h
+webapp                ClusterIP   10.97.31.203     <none>        8080/TCP         16h
+```
+
+或者使用
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl get rc,service
+NAME                           DESIRED   CURRENT   READY     AGE
+replicationcontroller/webapp   2         2         2         16h
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          5d
+service/kubernetes-bootcamp   NodePort    10.100.106.232   <none>        8080:32191/TCP   4d
+service/nginx-service         ClusterIP   10.109.20.127    <none>        8000/TCP         3d
+service/webapp                ClusterIP   10.97.31.203     <none>        8080/TCP         16h
+```
+
+查看 rc 和 service
+
+删除 RC
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl delete rc redis-master redis-slave frontend
+replicationcontroller "redis-master" deleted
+replicationcontroller "redis-slave" deleted
+replicationcontroller "frontend" deleted
+```
+
+删除 RC 后，由 RC 创建的 pod 会被终止，删除
+
+pod 正在被终止(STATUS=Terminating)
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl get pods
+NAME                                   READY     STATUS        RESTARTS   AGE
+frontend-czlc8                         0/1       Terminating   0          18h
+frontend-mfvc4                         0/1       Terminating   0          18h
+frontend-nhhdc                         0/1       Terminating   0          18h
+kubernetes-bootcamp-7799cbcb86-2hrlp   1/1       Running       1          4d
+kubernetes-bootcamp-7799cbcb86-hkk52   1/1       Running       1          4d
+kubernetes-bootcamp-7799cbcb86-zpx5f   1/1       Running       1          4d
+nginx-service                          1/1       Running       1          3d
+nginx-test-a                           1/1       Running       1          3d
+nginx-test-b                           1/1       Running       1          3d
+redis-slave-58sp7                      1/1       Terminating   0          18h
+redis-slave-6kdh4                      1/1       Terminating   0          18h
+volume-pod                             2/2       Running       0          17h
+webapp-jkdwz                           1/1       Running       0          16h
+webapp-vzbbl                           1/1       Running       0          16h
+```
+
+过一会儿，再次查看
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl get pods
+NAME                                   READY     STATUS    RESTARTS   AGE
+kubernetes-bootcamp-7799cbcb86-2hrlp   1/1       Running   1          4d
+kubernetes-bootcamp-7799cbcb86-hkk52   1/1       Running   1          4d
+kubernetes-bootcamp-7799cbcb86-zpx5f   1/1       Running   1          4d
+nginx-service                          1/1       Running   1          3d
+nginx-test-a                           1/1       Running   1          3d
+nginx-test-b                           1/1       Running   1          3d
+volume-pod                             2/2       Running   0          17h
+webapp-jkdwz                           1/1       Running   0          16h
+webapp-vzbbl                           1/1       Running   0          16h
+```
+
+删除 Service
+
+```bash
+➜  kubernetes-research git:(master) ✗ kubectl delete svc redis-master redis-slave frontend
+service "redis-master" deleted
+service "redis-slave" deleted
+service "frontend" deleted
+```
+
 访问 frontend service
 
 ```bash
 minikube service frontend
 ```
 
-配置 shell，可以
+配置 shell
 
 ```bash
 eval $(minikube docker-env)
 ```
 
-使用 docker ps 查看 pod 中 docker 的 container
+可以使用 docker ps 查看 pod 中 docker 的 container
 
 ```bash
 ➜  kubernetes-research git:(master) ✗ docker ps | grep frontend

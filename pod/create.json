@@ -24,7 +24,7 @@
         "image": "sickp/alpine-sshd",
         "ports": [
           {
-            "containerPort": 6379,
+            "containerPort": 22,
             "hostPort": 8888
           }
         ]
