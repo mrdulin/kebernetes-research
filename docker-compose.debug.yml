@@ -1,8 +1,8 @@
 version: '2.1'
 
 services:
-  kebernetes-research:
-    image: kebernetes-research
+  kebernetes:
+    image: kubernetes-tutorial
     build: .
     environment:
       NODE_ENV: development

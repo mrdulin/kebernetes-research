@@ -1,0 +1,21 @@
+{
+  "name": "kubernetes-tutorial",
+  "version": "1.0.0",
+  "description": "A nodejs application for kubernetes research",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrdulin/kubernetes-tutorial.git"
+  },
+  "author": "mrdulin <novaline.dulin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrdulin/kubernetes-tutorial/issues"
+  },
+  "homepage": "https://github.com/mrdulin/kubernetes-tutorial#readme"
+}
