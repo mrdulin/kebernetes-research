@@ -5,7 +5,7 @@
 创建 pod:
 
 ```bash
-kubernetes-research git:(master) ✗ kubectl create -f ./pod/create.json
+kubernetes-research git:(master) ✗ kubectl create -f ./pod/podtest.json
 pod "podtest" created
 ```
 
@@ -36,17 +36,17 @@ kube-shell> kubectl logs podtest master1
 
 ## 问题
 
-* `The Pod "podtest" is invalid: spec.containers[1].ports[0].hostPort: Duplicate value: "TCP//6388"`
+- `The Pod "podtest" is invalid: spec.containers[1].ports[0].hostPort: Duplicate value: "TCP//6388"`
 
 原因： 同一个 pod 的不同容器的端口不能映射到宿主机上的同一个端口，会引起端口冲突
 
-* 怎么通过ssh登录到minikube VM中pod中的容器？
+- 怎么通过 ssh 登录到 minikube VM 中 pod 中的容器？
 
-这里以podtest.json资源对象为例，要通过ssh的方式登录到master2容器
+这里以 podtest.json 资源对象为例，要通过 ssh 的方式登录到 master2 容器
 
-1. `minikube ssh` - 登录到minikube VM中
+1. `minikube ssh` - 登录到 minikube VM 中
 
-2. `ssh root@127.0.0.1 -p 8888` - 8888端口是minikube VM作为宿主机的端口, 22端口是该VM中运行的master2容器内的端口，其实就是容器端口和宿主机端口的映射。这里需要清楚的是你当前所在的环境，是minikube VM中，而不是本地系统
+2. `ssh root@127.0.0.1 -p 8888` - 8888 端口是 minikube VM 作为宿主机的端口, 22 端口是该 VM 中运行的 master2 容器内的端口，其实就是容器端口和宿主机端口的映射。这里需要清楚的是你当前所在的环境，是 minikube VM 中，而不是本地系统
 
 ```bash
 $ ssh root@127.0.0.1 -p 8888
@@ -64,4 +64,4 @@ You may change this message by editing /etc/motd.
 podtest:~#
 ```
 
-root用户的默认密码是root
+root 用户的默认密码是 root
